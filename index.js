@@ -1,78 +1,80 @@
 let dragN = document.getElementsByClassName(`game`);
 
-function preventCopy(event){
+function preventCopy(event) {
     event.preventDefault();
 }
 
 for (let i of dragN) {
-    i.ondragstart = ()=>false;
+    i.ondragstart = () => false;
     beginStyles.cache = new Map();
-    function beginStyles(styles, elem){
+
+    function beginStyles(styles, elem) {
         if (!styles) return;
-        if (styles.includes(`(change)`)){
+        if (styles.includes(`(change)`)) {
             elem.style.cssText = styles.split(`(change)`).join(``);
-        }
-        else{
+        } else {
             let cacheIn = beginStyles.cache.get(styles);
             let workObj;
-            if (cacheIn){
+            if (cacheIn) {
                 workObj = cacheIn;
                 console.log(`we had it`);
-            }
-            else{
-                workObj = styles.split(`;`).map(item=>[item.split(`:`)[0].split(` `).join(``), item.split(`:`)[1]]);
+            } else {
+                workObj = styles.split(`;`).map(item => [item.split(`:`)[0].split(` `).join(``), item.split(`:`)[1]]);
                 workObj.pop();
                 beginStyles.cache.set(styles, workObj);
             }
-            for (let [i,j] of workObj){
+            for (let [i, j] of workObj) {
                 elem.style[i] = j;
             }
         }
     }
-    function doBegin(text, target, holder){
+
+    function doBegin(text, target, holder) {
         new Function(`dragElem`, `target`, text)(target, holder);
     }
-    i.addEventListener(`mousedown`, function (event){
+
+    i.addEventListener(`mousedown`, function (event) {
         let target = event.target.closest(`[data-dnd]`);
         if (!target || target.allMovePrevented || target.onCanceling) return;
-        if (!target.dataset.dndCopy || Boolean(target.dataset.dndCopy)){
-            document.addEventListener(`mousedown`,preventCopy);
-            document.addEventListener(`dblclick`,preventCopy);
+        if (!target.dataset.dndCopy || Boolean(target.dataset.dndCopy)) {
+            document.addEventListener(`mousedown`, preventCopy);
+            document.addEventListener(`dblclick`, preventCopy);
         }
         let isEverMoved = false;
         let holder = document.getElementById(target.parentElement.dataset.holder);
         target.beginStyles = target.style.cssText;
         target.calcStyles = getComputedStyle(target);
         target.beginStyleObj = Object.assign({}, target.style);
-        let move = function (elem, event){
-            elem.style.left = event.pageX - xDifference+ `px`;
-            elem.style.top = event.pageY - yDifference+ `px`;
+        let move = function (elem, event) {
+            elem.style.left = event.pageX - xDifference + `px`;
+            elem.style.top = event.pageY - yDifference + `px`;
         }.bind(null, target);
         let mouseCordsStart;
         beginStyles(target.dataset.dndStylebegin, target);
         beginStyles(holder.dataset.dndStylebegin, holder);
-        doBegin(target.dataset.dndDobegin,target, holder);
-        doBegin(holder.dataset.dndDobegin,target, holder);
+        doBegin(target.dataset.dndDobegin, target, holder);
+        doBegin(holder.dataset.dndDobegin, target, holder);
         let yDifference = event.pageY - target.getBoundingClientRect().y - pageYOffset;
         let xDifference = event.pageX - target.getBoundingClientRect().x - pageXOffset;
-        let a= (target.getBoundingClientRect().y + pageYOffset);
+        let a = (target.getBoundingClientRect().y + pageYOffset);
         let cordsStart = [target.getBoundingClientRect().x, a];
         let width = target.getBoundingClientRect().width;
         let height = target.getBoundingClientRect().height;
-        function setPosition(event){
+
+        function setPosition(event) {
             if (target.allMovePrevented) return;
             isEverMoved = true;
-            if (Boolean(target.dataset.dndClone) || target.dataset.dndClone === undefined){
+            if (Boolean(target.dataset.dndClone) || target.dataset.dndClone === undefined) {
                 console.log(target.dataset.dndClone);
                 console.log(Boolean(target.dataset.dndClone));
                 target.clone = target.cloneNode(true);
                 target.clone.style.visibility = `hidden`;
-                target.clone.style.zIndex=`-1`;
+                target.clone.style.zIndex = `-1`;
                 Object.defineProperty(target, `clone`, {writable: false});
                 target.clone.removeAttribute(`data-dnd`);
                 target.parentElement.append(target.clone);
                 beginStyles(target.dataset.dndClonebegin, target.clone);
-                target.addEventListener(`clone`, function (event){
+                target.addEventListener(`clone`, function (event) {
                     target.clone.replaceWith(target);
                 }, {once: true});
             }
@@ -83,61 +85,70 @@ for (let i of dragN) {
             target.style.width = String(width) + `px`;
             target.style.height = String(height) + `px`;
         }
-        document.addEventListener(`mousemove`,setPosition , {once: true});
+
+        document.addEventListener(`mousemove`, setPosition, {once: true});
         document.addEventListener(`mousemove`, move);
         let tracker = {
-            "-1": (a)=>!a,
-            "1": (a)=>a
+            "-1": (a) => !a,
+            "1": (a) => a
         }
         let colors = {
             "1": `0 0 14px 7px #20264d`,
             "-1": `0 0 10px 5px #32468c`
         }
         let i = 1;
-        function insideCheck(){
-            try{
-                let cords = [(target.getBoundingClientRect().left + target.getBoundingClientRect().right)/2, (target.getBoundingClientRect().top + target.getBoundingClientRect().bottom)/2];
+
+        function insideCheck() {
+            try {
+                let cords = [(target.getBoundingClientRect().left + target.getBoundingClientRect().right) / 2, (target.getBoundingClientRect().top + target.getBoundingClientRect().bottom) / 2];
                 target.style.display = `none`;
-                if (tracker[i](document.elementFromPoint(...cords).closest(`#${holder.id}`))){
+                if (tracker[i](document.elementFromPoint(...cords).closest(`#${holder.id}`))) {
                     holder.style.boxShadow = colors[i];
-                    abilityToChange = !Boolean(i-1);
+                    abilityToChange = !Boolean(i - 1);
                     console.log(abilityToChange);
                     i = -i;
                 }
                 target.style.display = target.beginStyleObj.display;
+            } catch (e) {
             }
-            catch (e){}
         }
+
         let abilityToChange = false;
         document.addEventListener(`mousemove`, insideCheck);
-        document.addEventListener(`mouseup`, function (event){
+        document.addEventListener(`mouseup`, function (event) {
             target.allMovePrevented = true;
             target.onCanceling = true;
-            function back(){
+
+            function back() {
                 target.style.cssText = target.beginStyles;
                 holder.style.boxShadow = `none`;
                 target.onCanceling = false;
-                setTimeout(()=>target.allMovePrevented = false, 200);
+                setTimeout(() => target.allMovePrevented = false, 200);
             }
-            function backClone(){
+
+            function backClone() {
                 target.dispatchEvent(new CustomEvent(`clone`));
                 back();
-                document.removeEventListener(`mousemove`,preventCopy);
-                document.removeEventListener(`dblclick`,preventCopy);
+                document.removeEventListener(`mousemove`, preventCopy);
+                document.removeEventListener(`dblclick`, preventCopy);
             }
+
             let time = 0;
             console.log(`inside`);
             document.removeEventListener(`mousemove`, move);
             document.removeEventListener(`mousemove`, insideCheck);
             document.removeEventListener(`mousemove`, setPosition, {once: true});
-            console.log(`moved` , isEverMoved);
-            if (!isEverMoved) {back(); return;}
+            console.log(`moved`, isEverMoved);
+            if (!isEverMoved) {
+                back();
+                return;
+            }
             if (abilityToChange) {
                 time = 1000;
                 target.querySelector(`[data-changeTarget]`).style.color = `#3b58ad`;
                 let changeTarget = holder.querySelector(`[data-changeTarget]`);
                 changeTarget.style.color = `#32468c`;
-                setTimeout(function (){
+                setTimeout(function () {
                     let a = target.dataset.dndValue;
                     target.dataset.dndValue = holder.dataset.holding;
                     refactorInnerData(target);
@@ -150,12 +161,12 @@ for (let i of dragN) {
                 target.style.transform = `none`;
                 holder.style.boxShadow = `0 0 14px 7px #3c7d41`;
             }
-            setTimeout(function (){
+            setTimeout(function () {
                 target.style.transform = `none`;
                 target.style.transitionProperty = `left, top, background-color, transform`;
                 target.style.transitionDuration = `0.6s`;
-                target.style.left = cordsStart[0]+`px`;
-                target.style.top = cordsStart[1]+`px`;
+                target.style.left = cordsStart[0] + `px`;
+                target.style.top = cordsStart[1] + `px`;
                 console.log(target.onCanceling);
                 setTimeout(backClone, 600);
             }, time);
