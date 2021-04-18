@@ -1,9 +1,10 @@
 let dragN = document.getElementsByClassName(`game`);
+
 function preventCopy(event){
     event.preventDefault();
 }
 
-for (let i of dragN){
+for (let i of dragN) {
     i.ondragstart = ()=>false;
     beginStyles.cache = new Map();
     function beginStyles(styles, elem){
@@ -161,19 +162,24 @@ for (let i of dragN){
         }, {once: true});
     });
 }
-let codeBlocks = document.getElementsByClassName(`code`);
-function refactorInnerData(i){
-    i.querySelector(`[data-changeTarget]`).innerText = i.dataset.dndValue;
-}
-function refactorInnerCode(i){
-    i.querySelector(`.screen`).innerHTML = ``;
-    i.querySelector(`.screen`).insertAdjacentHTML(`afterbegin`,i.querySelector(`.codeBlock`).innerText);
-}
-for (let i of codeBlocks){
-    refactorInnerCode(i);
+
+const codeBlocksText = {
+    1: `<p style="">Абзац текста</p>`,
+    2: `<p style="background-color: purple;">Это абзац</p>\n<p>Hello!</p>\n<div>Новый контейнер</div>`
 }
 
-
+let codeBlocks = document.querySelectorAll(".code-section");
+for (let i of codeBlocks) {
+    let lines = codeBlocksText[i.getAttribute("codeindex")].split("\n");
+    for (let line of lines) {
+        let newLine = document.createElement("div");
+        newLine.classList.add("code-line");
+        newLine.innerHTML = `<div class="code-block"><pre><code class="code-string"></code></pre></div>`;
+        newLine.querySelector("code").innerHTML = hljs.highlightAuto(line).value;
+        i.querySelector(".code-block-wrapper").appendChild(newLine);
+    }
+    i.querySelector(`.screen`).innerHTML = codeBlocksText[i.getAttribute("codeindex")];
+}
 
 
 /*

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="learn.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css"
+          rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+</head>
+<body>
+<main>
+    <section>
+        <h1 class="text-center">Атрибут style</h1>
+        <p>
+            На прошлом занятии мы познакомились с некоторыми атрибутами, которые позволяют
+            нам изменять внешний вид текста - накладывать фон, добавлять подчеркивание,
+            изменять шрифт. Мы делали это с помощью большого количества различных атрибутов,
+            но существует один универсальный атрибут - <span class="inline-code">style</span>.
+            По названию интуитивно понятно, что атрибут <span class="inline-code">style</span>
+            будет регулировать стили текста или элемента. Давайте разбиремся, как он работает.
+        </p>
+    </section>
+
+    <div class="code-section" codeindex="1">
+        <div class="code-block-wrapper"></div>
+        <div class="screen"></div>
+    </div>
+
+    <section>
+        <h2 class="text-center">Как работает style</h2>
+        <p>
+            <span class="inline-code">style</span> ничем не отличается от обычного атрибута. Первое что нам нужно это
+            написать в нашем элементе
+            атрибут <span class="inline-code">style</span>, давайте
+            для примера будем использовать тег <span class="inline-code">&lt;p&gt;</span>
+        </p>
+        <p>
+            Здесь у нас атрибут <span class="inline-code">style</span> пуст, мы не задаем нашему абзацу никакие
+            стили. Важно понимать, что все содержимое атрибута style должно находиться в ковычках. Давайте
+            изменим цвет фона у нашего абзаца. Помните <span class="inline-code">bgcolor</span>?
+            Сейчас мы напишем нечто похожее.
+        </p>
+        <div>
+            <p>
+                Давайте поймем что тут произошло и то как устроен <span class="inline-code">style</span>. Содержимое
+                <span class="inline-code">style</span>
+                должно соответствовать такому принципу:
+            </p>
+            <div class="code-snippet">
+                &lt;свойство1&gt;:&lt;значение свойства&gt;; &lt;свойство2&gt:&ltзначение свойства&gt;
+            </div>
+            <p>
+                и тд. Каждое свойство по-своему
+                видоизменяет элемент. <span class="inline-code">background-color</span> изменяет фон элемента. Вы можете
+                поиграться с этим свойством
+                что посмотреть на то как оно работает.
+            </p>
+        </div>
+
+        <div class="code-section" data-dnd-doBegin="console.log(target.id)"
+             data-dnd-styleBegin="boxShadow:0 0 10px 5px #32468c;"
+             data-holding="purple" id="colors" codeindex="2">
+            <div class="code-block-wrapper"></div>
+            <div class="screen"></div>
+        </div>
+
+        <section class="game" data-holder="colors" data-possibility="onlyOne">
+            <div data-dnd data-dnd-styleBegin="transform: scale(0.8);" data-dnd-value="white" style="order: 1;"><p>
+                background-color: <span data-changeTarget>white</span>;</p></div>
+            <div data-dnd data-dnd-styleBegin="transform: scale(0.8);" data-dnd-value="blue" style="order: 2;"><p>
+                background-color: <span data-changeTarget>blue</span>;</p></div>
+            <div data-dnd data-dnd-styleBegin="transform: scale(0.8);" data-dnd-value="red" style="order: 3;"><p>
+                background-color: <span data-changeTarget>red</span>;</p></div>
+            <div data-dnd data-dnd-styleBegin="transform: scale(0.8);" data-dnd-value="gray" style="order: 4;"><p>
+                background-color: <span data-changeTarget>gray</span>;</p></div>
+        </section>
+
+    </section>
+</main>
+
+<script src="./index.js"></script>
+
+</body>
+</html>
