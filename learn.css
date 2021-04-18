@@ -179,10 +179,11 @@ pre {
 
 .code-line {
     box-sizing: border-box;
-    margin-left: 40px;
+    margin-left: 5vw;
     background-color: #333740;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .code-block-wrapper {
@@ -210,8 +211,9 @@ pre {
     content: counter(count);
     counter-increment: count;
     position: absolute;
-    width: 40px;
-    left: 0;
+    width: 5vw;
+    top: 0;
+    left: -5vw;
     display: flex;
     justify-content: center;
     font-family: Iosevka, monospace;
