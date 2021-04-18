@@ -16,6 +16,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     display: block;
 }
 
+@font-face {
+    font-family: "Iosevka", monospace;
+    src: url("fonts/Iosevka/iosevka-medium.ttf");
+}
+
+@font-face {
+    font-family: "Ubuntu", serif;
+    src: url("fonts/Ubuntu/Ubuntu-Regular.ttf")
+}
+
 body {
     line-height: 1.2;
     height: auto;
