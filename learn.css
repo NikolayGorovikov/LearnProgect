@@ -1,6 +1,6 @@
 /* сброс стилей браузера */
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
-acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike,
+acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike,
 strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
@@ -11,88 +11,168 @@ time, mark, audio, video {
     font-size: 100%;
     vertical-align: baseline;
 }
-
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block;
 }
-
-@font-face {
-    font-family: "Iosevka", monospace;
-    src: url("fonts/Iosevka/iosevka-medium.ttf");
-}
-
-@font-face {
-    font-family: "Ubuntu", serif;
-    src: url("fonts/Ubuntu/Ubuntu-Regular.ttf")
-}
-
 body {
     line-height: 1.2;
     height: auto;
     max-width: 100vw;
-    background-color: #e2e2e2;
+    background-color: #6f95ff;
     overflow-x: hidden;
+    overflow: hidden;
 }
-
-html {
+html{
     max-width: 100vw;
     scroll-behavior: smooth;
 }
-
 ol {
     padding-left: 1.4em;
     list-style: decimal;
 }
-
 ul {
     padding-left: 1.4em;
     list-style: square;
 }
-
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
-main {
-    max-width: 1600px;
+@font-face {
+    font-family: geometria-extrabold;
+    src: url("Geometria-ExtraBold.woff") format("woff");
+    font-display: swap;
+}
+@font-face {
+    font-family: geometria-light;
+    src: url("Geometria-Light.woff") format("woff");
+    font-display: swap;
+}
+@font-face {
+    font-family: geometria-normal;
+    src: url("Geometria.woff") format("woff");
+    font-display: swap;
+}
+@font-face {
+    font-family: geometria-medium;
+    src: url("Geometria-Medium.woff") format("woff");
+    font-display: swap;
+}
+@font-face {
+    font-family: Vollkorn;
+    src: url("Vollkorn-Regular.ttf") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: Vollkorn;
+    src: url("Vollkorn-Medium.ttf") format("truetype");
+    font-display: swap;
+    font-weight: bold;
+}
+main{
+    max-width: 2000px;
     margin: auto;
     padding: 3vw 100px 0 100px;
     overflow: hidden;
 }
-
 h1 {
-    font-family: Ubuntu, sans-serif;
+    font-family: geometria-medium, sans-serif;
     font-size: 4vw;
     text-indent: 1em;
     margin-bottom: 0.2em;
-    color: #000000;
+    color: #293168;
 }
-
-h2 {
-    font-family: Ubuntu, sans-serif;
+h2{
+    font-family: geometria-medium, sans-serif;
     font-size: 3vw;
     text-indent: 4vw;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    color: #000000;
+    color: #293168;
 }
-
-p {
-    font-family: Ubuntu, sans-serif;
+p{
+    font-family: Vollkorn, sans-serif;
     font-size: 1.5vw;
     text-indent: 1em;
+    max-font-size: 30px;
     padding-top: 0.5em;
     line-height: 1.3em;
 }
-
-[data-changeTarget] {
+.inner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    margin-bottom: 2vw;
+}
+.inner:nth-of-type(n+2){
+    margin-top: 2vw;
+}
+.text{
+    flex-grow: 1;
+    width: 55%;
+    max-font-size: 30px;
+}
+.code:not(.code p){
+    flex-grow: 1;
+    width: 50%;
+    background-color: #dbdae3;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.3vw;
+    margin-top: 1.5vw;
+    transition-property: box-shadow;
+    transition-duration: 0.5s;
+}
+.margin{
+    margin-top: 3vw;
+}
+.codeBlock{
+    width: auto;
+    height: auto;
+    padding: 1vw 0;
+    background-color: #3b58ad;
+    counter-reset: count 0;
+    color: #dbdae3;
+}
+.codeSection{
+    box-sizing: border-box;
+    width: 80%;
+    background-color: #32468c;
+    margin: 0 5% 0 15%;
+    padding: 0.3vw 8px 0.3vw 8px;
+    position: relative;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.3vw;
     transition-property: color;
     transition-duration: 0.4s;
 }
-
-
-.game {
+[data-changeTarget]{
+    transition-property: color;
+    transition-duration: 0.4s;
+}
+.codeSection:before{
+    content: counter(count);
+    counter-increment: count;
+    position: absolute;
+    width: calc((0.15 / 0.8) * 100%);
+    height: 100%;
+    background-color:  #3b58ad;
+    top: 0;
+    left: calc((0.15 / 0.8) * -100%);
+    text-align: center;
+    line-height: 150%;
+    font-size: inherit;
+}
+.screen{
+    background-color: #dbdae3;
+    color: #20264d;
+    margin-top: 8px;
+    min-height: 15vh;
+    position: relative;
+}
+.game{
     display: flex;
     width: 100%;
     height: 6vw;
@@ -100,13 +180,13 @@ p {
     justify-content: space-around;
     flex-direction: row;
     align-items: center;
+    max-font-size: 30px;
 }
-
-.game div {
+.game div{
     box-sizing: border-box;
-    background-color: #8b8b8b;
-    border-radius: 5px;
-    border: solid #5f5f5f 5px;
+    background-color: #3b58ad;
+    border-radius: 1.5vw;
+    border: solid #32468c 8px;
     flex-grow: 1;
     width: calc(100% - 8vw);
     height: 6vw;
@@ -114,127 +194,175 @@ p {
     color: #dbdae3;
     display: flex;
     cursor: pointer;
-    transition-property: background-color, color, transform, background-color, border, box-shadow;
+    transition-property:background-color,color, transform ,background-color ,border, box-shadow;
     transition-duration: 0.4s;
 
 }
-
-.game div p {
+.game div:hover{
+    box-shadow: 0 0 8px 2px #3b58ad;
+}
+.game div p{
     padding: 0;
     text-indent: 0;
     font-weight: 700;
-    font-family: "Iosevka", monospace;
+    font-family: monospace;
     font-size: 1.4vw;
     text-align: center;
     margin: auto;
 }
-
-.shadowAnimating {
-    /*animation-name: shadow;*/
-    /*animation-duration: 1.7s;*/
-    /*animation-fill-mode: forwards;*/
-    /*animation-timing-function: ease;*/
-    box-shadow: 0 0 14px 7px #6bb368;
-    color: #3c7d41;
-}
-
-@keyframes shadow {
-    40%, 60% {
-        box-shadow: 0 0 0 0 #20264d;
-    }
-    100% {
-        box-shadow: 0 0 40px 7px transparent;
-    }
-}
-
-/*
-    Добавляет перенос автоматический перенос
-    слов в блоках с кодом
-*/
-pre {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;
-}
-
-.inline-code {
-    font-family: "Iosevka", monospace;
-    background-color: #bbbbbb;
-    border-radius: 5px;
-    padding: 0 10px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.code-section {
-    margin: 30px 20px;
-    display: flex;
-    flex-direction: row;
-    flex-basis: 100px;
-    height: 100%;
-}
-
-.code-line {
-    box-sizing: border-box;
-    margin-left: 5vw;
-    background-color: #333740;
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.code-block-wrapper {
-    counter-reset: count 0;
-    background-color: #2a2c32;
-    font-size: 1.3vw;
-    color: #dbdae3;
-    width: 50%;
-    min-height: 100%;
-    padding: 1vh 10px 1vh 0;
-    position: relative;
-    display: flex;
-    flex-flow: column;
-}
-
-.code-block {
-    min-height: 100%;
-}
-
-.code-line:last-child {
-    flex: 1 1 auto;
-}
-
-.code-line:before {
-    content: counter(count);
-    counter-increment: count;
+.advice{
     position: absolute;
-    width: 5vw;
+    height: 100vh;
+    background-color: #6f95ff;
+    width: 100vw;
+    z-index: 100;
+}
+.advice .closeBar{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    cursor: pointer;
+
+}
+.advice .closeBar:before, .advice .closeBar:after{
+    content:"";
+    width: 15px;
+    height: 80px;
+    position: absolute;
     top: 0;
-    left: -5vw;
+    left: 32.5px;
+    border-radius: 10px;
+    transition-property: background-color;
+    transition-duration: 0.7s;
+    transition-delay: 0.1s;
+}
+.advice .closeBar:before{
+    transform: rotate(45deg);
+}
+.advice .closeBar:after{
+    transform: rotate(-45deg);
+}
+.advice .closeBar:hover:before, .advice .closeBar:hover:after{
+    background-color: #32468c;
+}
+.advice > section{
+    margin-top: 40px;
     display: flex;
-    justify-content: center;
-    font-family: Iosevka, monospace;
-    font-size: inherit;
 }
-
-.screen {
-    width: 50%;
-    min-height: 100%;
-    background-color: white;
-    border-bottom: 2px solid #333740;
-    border-right: 2px solid #333740;
-    border-top: 2px solid #333740;
+.advice > h1{
+    font-size: 5vw;
+    padding-top: 30px;
+    text-indent: 10vw;
 }
-
-.code-snippet {
-    font-family: "Iosevka", monospace;
-    background-color: #bbbbbb;
-    border-radius: 5px;
-    padding: 20px 10px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-size: 1.4vw;
+.wrap{
+    flex-wrap: wrap;
+    height: 20vh;
+    margin-top: calc(3vw - 2vh);
+    margin-bottom: calc(3vw - 2vh);
+    align-content: stretch;
+    align-items: stretch;
+}
+.wrap > div{
+    flex-basis: 40%;
+    align-self: stretch;
+    height: 10vh;
+}
+.center{
+    align-self: center;
+}
+.test{
+    position: relative;
+}
+.slideTest{
+    height: inherit;
+    transition-property: opacity, transform;
+    transition-duration: 1s;
+    position: absolute;
+    left: 12.5%;
+    width: 75%;
+}
+.success{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 6vh;
+    right: 4vw;
+    border-radius: 50%;
+    z-index: -1;
+}
+.successIn{
+    background-color: #6f95ff;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    right: 12.5%;
+    top: 12.5%;
+    position: absolute;
+    transform: rotate(45deg);
+}
+.animate{
+    transition-delay: 0.25s;
+    transition-property: background-color;
+    transition-timing-function: linear;
+    background-color: #3b58ad;
+}
+.animate .leftSide{
+    transition-property: transform;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+    transform: rotate(360deg);
+}
+.animate .rightSide{
+    transition-property: z-index;
+    transition-delay: 0.25s;
+    transition-timing-function: linear;
+    z-index: 0;
+}
+.rightSide{
+    z-index: 3;
+}
+.fr{
+    background-color: #3b58ad;
+    position: absolute;
+    left: 12px;
+    height: 10px;
+    top: 38px;
+    width: 0;
+}
+.sc{
+    background-color: #3b58ad;
+    position: absolute;
+    bottom: 22px;
+    left: 32px;
+    width: 10px;
+    height: 0;
+}
+.animate .fr{
+    transition-duration: 0.25s;
+    transition-property: width;
+    transition-timing-function: linear;
+    width: 30px;
+}
+.animate .sc{
+    transition-delay: 0.25s;
+    transition-duration: 0.25s;
+    transition-property: height;
+    transition-timing-function: linear;
+    height: 30px;
+}
+.slideTest > p{
+    max-width: 85%;
+    z-index: 10000;
+}
+.slideTest > h2{
+    z-index: 100;
+}
+.test_5 .game > div{
+    height: 6.5vw;
+}
+.test_5 .game{
+    margin-top: calc(2vw - 3vh);
+    margin-bottom: calc(2vw - 3vh);
 }

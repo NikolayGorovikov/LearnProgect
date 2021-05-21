@@ -3,83 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="learn.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css"
-          rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <link rel="stylesheet" href="learn.css">
+    <link rel="stylesheet" href="slider2.css">
 </head>
-<body>
-<main>
-    <section>
-        <h1 class="text-center">Атрибут style</h1>
-        <p>
-            На прошлом занятии мы познакомились с некоторыми атрибутами, которые позволяют
-            нам изменять внешний вид текста - накладывать фон, добавлять подчеркивание,
-            изменять шрифт. Мы делали это с помощью большого количества различных атрибутов,
-            но существует один универсальный атрибут - <span class="inline-code">style</span>.
-            По названию интуитивно понятно, что атрибут <span class="inline-code">style</span>
-            будет регулировать стили текста или элемента. Давайте разбиремся, как он работает.
-        </p>
-    </section>
+<body style="position: relative; overflow-x: hidden;">
+<div id="topLeft" style="width: 40px; height: 40px; position:absolute;"></div>
+<div id="topRight" style="width: 40px; height: 40px; position:absolute; right: 0;"></div>
+<div id="bottomRight" style="width: 40px; height: 40px; position:absolute; right: 0; bottom: 0;"></div>
+<div id="bottomLeft" style="width: 40px; height: 40px; position:absolute; bottom:0;"></div>
+  <div class="advice" id="advice">
+    <div onclick="clearInterval(a);" class="closeBar" id="closeBar1" data-closeAnimation="elem.parentElement.style.transitionProperty = `opacity`; elem.parentElement.style.transitionDuration = `0.5s` ;elem.parentElement.style.opacity = `0`; document.body.style.overflow=`auto`; document.body.style.overflowX = `hidden`; setTimeout(()=>elem.parentElement.style.display=`none`, 500)"></div>
+    <h1>Подсказки</h1>
 
-    <div class="code-section" codeindex="1">
-        <div class="code-block-wrapper"></div>
-        <div class="screen"></div>
-    </div>
-
-    <section>
-        <h2 class="text-center">Как работает style</h2>
-        <p>
-            <span class="inline-code">style</span> ничем не отличается от обычного атрибута. Первое что нам нужно это
-            написать в нашем элементе
-            атрибут <span class="inline-code">style</span>, давайте
-            для примера будем использовать тег <span class="inline-code">&lt;p&gt;</span>
-        </p>
-        <p>
-            Здесь у нас атрибут <span class="inline-code">style</span> пуст, мы не задаем нашему абзацу никакие
-            стили. Важно понимать, что все содержимое атрибута style должно находиться в ковычках. Давайте
-            изменим цвет фона у нашего абзаца. Помните <span class="inline-code">bgcolor</span>?
-            Сейчас мы напишем нечто похожее.
-        </p>
-        <div>
-            <p>
-                Давайте поймем что тут произошло и то как устроен <span class="inline-code">style</span>. Содержимое
-                <span class="inline-code">style</span>
-                должно соответствовать такому принципу:
-            </p>
-            <div class="code-snippet">
-                &lt;свойство1&gt;:&lt;значение свойства&gt;; &lt;свойство2&gt:&ltзначение свойства&gt;
+      <div class="slider">
+        <div class="buttons">
+        </div>
+        <div class="button left" id="lb"></div>
+        <div class="button right" id="rb"></div>
+        <div class="slider-in" style="transition-duration: 1s; transition-property: transform;">
+          <div class="slide1">
+              <h2>Привет!</h2>
+              <p>
+                Предлагаю вам ознакомиться с некоторыми концепциями и понятиями которые будут использованы в этой статье, читать это
+                не обязательно, но все же предпочтительно.
+              </p>
+          </div>
+          <div class="slide2">
+            <h2>Вы встретите такие блоки</h2>
+            <div class="flexCover">
+              <div class="image" style="width: 100px;"></div>
+              <p>Это прямая трансляция кода из верхней части в белый экран снизу</p>
             </div>
-            <p>
-                и тд. Каждое свойство по-своему
-                видоизменяет элемент. <span class="inline-code">background-color</span> изменяет фон элемента. Вы можете
-                поиграться с этим свойством
-                что посмотреть на то как оно работает.
-            </p>
+
+          </div>
+          <div class="slide3">
+            <h2>Код с верху</h2>
+            <div class="image"></div>
+            <p>У вас могут возникнуть вопросы насчет того, куда делись &ltbody&gt, &lthead&gt и &lthtml&gt. Это сделано для сокращения, на самом деле в нашем мнимом коде есть и &ltbody&gt и &lthead&gt и &lthtml&gt, но просто нет смысла каждый раз это писать, ведь имеется что код с верху находится внутри &ltbody&gt</p>
+          </div>
+          <div class="slide4">
+            <h2>Экран снизу</h2>
+            <div class="flexCover">
+              <div class="image"></div>
+              <p>Тут все должно быть кристально ясно, это то как юудет выглядеть экран копьютера если мы запусим код сверху, только конечно в уменьшенном формате</p>
+            </div>
+          </div>
+          <div class="slide5">
+            <h2>Спасибо за прочтение!</h2>
+            <p>Надеюсь что у вас не возникнет никаких вопросов, но если что-то останется не понятным, задайте вопрос Максу Гусеву, или вашему учителю</p>
+          </div>
         </div>
+      </div>
 
-        <div class="code-section" data-dnd-doBegin="console.log(target.id)"
-             data-dnd-styleBegin="boxShadow:0 0 10px 5px #32468c;"
-             data-holding="purple" id="colors" codeindex="2">
-            <div class="code-block-wrapper"></div>
-            <div class="screen"></div>
-        </div>
-
-        <section class="game" data-holder="colors" data-possibility="onlyOne">
-            <div data-dnd data-dnd-styleBegin="transform: scale(0.8);" data-dnd-value="white" style="order: 1;"><p>
-                background-color: <span data-changeTarget>white</span>;</p></div>
-            <div data-dnd data-dnd-styleBegin="transform: scale(0.8);" data-dnd-value="blue" style="order: 2;"><p>
-                background-color: <span data-changeTarget>blue</span>;</p></div>
-            <div data-dnd data-dnd-styleBegin="transform: scale(0.8);" data-dnd-value="red" style="order: 3;"><p>
-                background-color: <span data-changeTarget>red</span>;</p></div>
-            <div data-dnd data-dnd-styleBegin="transform: scale(0.8);" data-dnd-value="gray" style="order: 4;"><p>
-                background-color: <span data-changeTarget>gray</span>;</p></div>
-        </section>
-
+  </div>
+  <main style="overflow: hidden;">
+    <section class="header">
+      <h1>Атрибут style</h1>
+      <p>
+        Вы познакомились с некоторыми атрибутами, которые позволяют нам некоторым образом изменять внешний вид текста -
+        накладывать фон, добавлять подчеркивание, изменять шрифт. Мы делали это с помощбю большого количества различных атрибутов,
+        но есть один,который объединяет все. По газванию интуитивно понятно, что атрибут <span class="name">style</span> будет регулировать
+        стили текста или элемента. Давайте разбиремся в том, как он работает.
+      </p>
     </section>
-</main>
+    <section class="info">
+      <div class="inner">
+        <div class="code margin" style="margin-right: 3vw;">
+          <div class="codeBlock">
+            <div class="codeSection">
+              <div class="codeString">&ltp <span class="name">style</span>="" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+            </div>
+          </div>
+          <div class="screen">
 
-<script src="./index.js"></script>
+          </div>
+        </div>
+        <div class="text">
+          <h2>Как работает style</h2>
+          <p>
+            Style ничем не отличается от обычного атрибута. Первое что нам нужно это написать в нашем элементе атрибут <span class="name">style</span>, давайте
+            для примера будем использовать тег &ltp&gt&lt/p&gt
+          </p>
+        </div>
+      </div>
+      <p>
+        Сдесь у нас атрибут <span class="name">style</span> пуст, мы не задаем наешему абзацу никакие стили. Важно понимать
+        что все содержимое атрибута style должно находиться в ковычках. Давайте изменим цвет фона у нашего абзаца. Помните <span class="name">bgcolor</span>?
+        Сейчас мы напишем нечто похожее.
+      </p>
+      <div class="inner">
+        <div class="text">
+          <p>
+            Давайте поймем что тут произошло и то как устроен <span class="name">style</span>. То что вы должны указать внутрь <span class="name">style</span>
+            должно соответствовать такому принципу: &ltсвойство1&gt:&ltзначение свойства&gt ; &ltсвойство2&gt:&ltзначение свойства&gt ; и тд. Каждое свойство по-своему
+            видоизменяет элемент. <span class="name">background-color</span> изменяет фон элемента. Вы можете поперетаскивать прямоугольники ниже в блок с кодом.
+          </p>
+        </div>
+        <div class="code" style="margin-left: 3vw;" id="colors" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target)" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;" data-holding="purple">
+          <div class="codeBlock">
+            <div class="codeSection">
+              <div class="codeString">&ltp <span class="name">style</span>="background-color: <span data-changeTarget="bcolor">purple</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+            </div>
+          </div>
+          <div class="screen">
 
+          </div>
+        </div>
+      </div>
+      <section class="game" data-possibility="onlyOne" data-holder="colors" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+        <div data-dnd-value="white" data-dnd style="order: 1;"><p>background-color: <span data-changeTarget="bcolor">white</span>;</p></div>
+        <div data-dnd-value="blue" data-dnd style="order: 2;"><p>background-color: <span data-changeTarget="bcolor">blue</span>;</p></div>
+        <div data-dnd-value="red" data-dnd style="order: 3;"><p>background-color: <span data-changeTarget="bcolor">red</span>;</p></div>
+        <div data-dnd-value="gray" data-dnd style="order: 4;"><p>background-color: <span data-changeTarget="bcolor">gray</span>;</p></div>
+      </section>
+      <h2>color</h2>
+      <p>
+        Вы познакомились со свойством background-color, но мы можем так же задать цвет и самому тексту, для этого есть свойство color. Нужно написать внутри
+        style color: цвет; кстати и в background-color и в color мы можем указывать цвет в любом из возможных форматов: hls, rgb, rgba и просто цвет, например purple.
+      </p>
+      <div class="inner">
+        <div class="text" style="order: 2;">
+          <section class="game wrap" data-possibility="onlyOne" data-holder="textColors" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+            <div data-dnd-value="gray" data-dnd style="order: 1;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">gray</span>;</p></div>
+            <div data-dnd-value="green" data-dnd style="order: 2;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">green</span>;</p></div>
+            <div data-dnd-value="yellow" data-dnd style="order: 3;margin-top: 1vh;"><p>color: <span data-changeTarget="color">yellow</span>;</p></div>
+            <div data-dnd-value="pink" data-dnd style="order: 4;margin-top: 1vh;"><p>color: <span data-changeTarget="color">pink</span>;</p></div>
+          </section>
+        </div>
+        <div class="code" style="margin-right: 3vw; order: 1; margin-top: auto; margin-bottom: auto;" id="textColors" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target)" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;" data-holding="purple">
+          <div class="codeBlock">
+            <div class="codeSection">
+              <div class="codeString">&ltp <span class="name">style</span>="color: <span data-changeTarget="color">purple</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+            </div>
+          </div>
+          <div class="screen">
+
+          </div>
+        </div>
+      </div>
+      <h2>Использование нескольких стилей</h2>
+      <p>Ранее вы применяли только один стиль в атрибуте style, но мы можем указать их сколько угодно, например, кто нам мешает сделать
+      текст синим и поставить его на белый фон? А самое главное что свойст огромное множество и мы можем стилизовать элемент абсолютно как нам вздумается. Поперетаскивайте ячейки что бы
+      понаблюдать за тем как изменяются сразу несколько стилей</p>
+      <div class="inner">
+        <div class="text">
+          <section class="game wrap" data-possibility="onlyOne" data-holder="two" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+            <div data-dnd-value="gray" data-dnd style="order: 1;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">gray</span>;</p></div>
+            <div data-dnd-value="green" data-dnd style="order: 2;margin-bottom: 1vh;"><p>background-color: <span data-changeTarget="bcolor">green</span>;</p></div>
+            <div data-dnd-value="yellow" data-dnd style="order: 3;margin-top: 1vh;"><p>color: <span data-changeTarget="color">yellow</span>;</p></div>
+            <div data-dnd-value="pink" data-dnd style="order: 4;margin-top: 1vh;"><p>background-color: <span data-changeTarget="bcolor">pink</span>;</p></div>
+          </section>
+        </div>
+        <div class="code" style="margin-left: 3vw;margin-top: auto; margin-bottom: auto;" id="two" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target)" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;" data-holding="purple">
+          <div class="codeBlock">
+            <div class="codeSection">
+              <div class="codeString">&ltp <span class="name">style</span>="color: <span data-changeTarget="color">black</span>; background-color: <span data-changeTarget="bcolor">purple</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+            </div>
+          </div>
+          <div class="screen">
+
+          </div>
+        </div>
+      </div>
+      <h2>Еще несколько стилей</h2>
+      <p>Стоит понимать что нет фиксированого колличества стилей, их бесчисленное множество, часть из них явлеется эксперементальной
+      , друая часть попросту бесполезной, есть стили которые очень часто испрользуются и сохраняют свою идею и осмысленность не смотря
+      на то что меняются тенденции дизайна, например color и background-color, уверен, что заходя на сайты вы часто виделя какой-то фоновый цевт
+      или не черный цвет текста, поэтому предлагаю ознакомиться вам еще с тремя стилями с которыми я уверен вы встречались</p>
+      <h2>font-family,font-style и font-weight</h2>
+      <div class="inner">
+        <div class="code margin center" id="fonts" style="margin-right: 3vw; margin-top: 0;" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target)" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;">
+          <div class="codeBlock">
+            <div class="codeSection">
+              <div class="codeString">&ltp <span class="name">style</span>="font-family: <span data-changeTarget="font">Vollkorn</span>; font-style: <span data-changeTarget="style">normal</span>; font-weight: <span data-changeTarget="weight">normal</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+            </div>
+          </div>
+          <div class="screen">
+
+          </div>
+        </div>
+        <div class="text">
+          <p>
+            font-family отвечает за шрифт текст. Нужно указать font-family: имя шрифта, причем если имя состоит из более чем двух букв,
+            нужно указать его в ковычках. font-style отвечает за начертание шрифта, если мы укажем туда italic то шрифт будет курсивный,
+            а если normal(значение по умолчанию) то щрифт будет обычным. font-weight задает жирность шрифта, если значение bold то текст жирный, если normal(по умолчанию)
+            то текст не жирный
+          </p>
+        </div>
+      </div>
+      <section class="game" data-possibility="onlyOne" data-holder="fonts" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+        <div data-dnd-value="Arial" data-dnd style="order: 1;"><p>font-family: <span data-changeTarget="font">Arial</span>;</p></div>
+        <div data-dnd-value="bold" data-dnd style="order: 2;"><p>font-weight: <span data-changeTarget="weight">bold</span>;</p></div>
+        <div data-dnd-value="italic" data-dnd style="order: 3;"><p>font-style: <span data-changeTarget="style">italic</span>;</p></div>
+        <div data-dnd-value="monospace" data-dnd style="order: 4;"><p>font-family: <span data-changeTarget="font">monospace</span>;</p></div>
+      </section>
+      <h2>Тесты</h2>
+      <p>Предлагаю просйти несколько тестов по порйденому ваи материалу, когда вы выберите правильный ответ, появится галочка в правом верхнем углу. Решенных заданий: <span id="num" style="transition-property: color; color: #293168;font-weight: bold;font-size: 1.6em; transition-duration: 0.5s;">0</span></p>
+      <div class="test" style="margin-top: 2vh;">
+        <div class="gray left"></div>
+        <div class="button right"></div>
+        <div class="test_1 slideTest">
+          <h2 style="margin-top: 6vh;">Задание 1</h2>
+          <p>Задайте абзацу такие стили, что бы цвет его текста слился с фоном</p>
+          <div class="inner" style="margin-top: 5vh;">
+            <div class="text" style="order: 2;">
+              <section class="game wrap" data-possibility="onlyOne" data-holder="test2" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+                <div data-dnd-value="gray" data-dnd style="order: 1;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">gray</span>;</p></div>
+                <div data-dnd-value="green" data-dnd style="order: 2;margin-bottom: 1vh;"><p>background-color: <span data-changeTarget="bcolor">green</span>;</p></div>
+                <div data-dnd-value="purple" data-dnd style="order: 3;margin-top: 1vh;"><p>color: <span data-changeTarget="color">purple</span>;</p></div>
+                <div data-dnd-value="gray" data-dnd style="order: 4;margin-top: 1vh;"><p>background-color: <span data-changeTarget="bcolor">gray</span>;</p></div>
+              </section>
+            </div>
+            <div class="code" style="margin-right: 3vw; margin-left: 3vh; order: 1; margin-top: auto; margin-bottom: auto;" id="test2" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target);setTimeout(()=>{if (document.querySelector(`.test_1 .screen p`).style.color === document.querySelector(`.test_1 .screen p`).style.backgroundColor) dragElem.dispatchEvent(new CustomEvent(`success`, {bubbles:true, detail:{elem:document.querySelector(`.test_1`)}}))}, 400);" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;" data-holding="purple">
+              <div class="codeBlock">
+                <div class="codeSection">
+                  <div class="codeString">&ltp <span class="name">style</span>="background-color: <span data-changeTarget="bcolor">purple</span>; color: <span data-changeTarget="color">black</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+                </div>
+              </div>
+              <div class="screen" style="overflow: hidden;"></div>
+            </div>
+            <div class="success">
+              <div class="successIn" style="z-index: 10;">
+                <div class="fr"></div>
+                <div class="sc"></div>
+              </div>
+              <div class="leftSide" style="z-index: 2; width: 50%; height: 80px; transform-origin: 100% 50%; overflow: hidden;position: absolute;">
+                <div class="innerLeft" style="width: 200%; border-radius: 50%; height: 80px; background-color: #3b58ad"></div>
+              </div>
+              <div class="rightSide" style="width: 50%; height: 80px; overflow: hidden; background-color: #6f95ff;position: absolute;">
+                <div class="innerRight"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="test_2 slideTest">
+          <h2 style="margin-top: 6vh;">Задание 2</h2>
+          <p>Сделайте тест абзаца красным и жирным, фон синим, никакие другие лишние стили давать не нужно(остальные должны иметь значение по-умолчанию).</p>
+          <div class="inner" style="margin-top: 5vh;">
+            <div class="text" style="order: 2;">
+              <section class="game wrap" data-possibility="onlyOne" data-holder="test1" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+                <div data-dnd-value="red" data-dnd style="order: 1;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">red</span>;</p></div>
+                <div data-dnd-value="blue" data-dnd style="order: 2;margin-bottom: 1vh;"><p>background-color: <span data-changeTarget="bcolor">blue</span>;</p></div>
+                <div data-dnd-value="bold" data-dnd style="order: 3;margin-top: 1vh;"><p>font-weight: <span data-changeTarget="weight">bold</span>;</p></div>
+                <div data-dnd-value="normal" data-dnd style="order: 4;margin-top: 1vh;"><p>font-style: <span data-changeTarget="style">normal</span>;</p></div>
+              </section>
+            </div>
+            <div class="code" style="margin-right: 3vw; margin-left: 3vh; order: 1; margin-top: auto; margin-bottom: auto;" id="test1" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target);setTimeout(()=>{if (document.querySelector(`.test_2 .screen p`).style.cssText === `background-color: blue; color: red; font-style: normal; font-weight: bold;`) dragElem.dispatchEvent(new CustomEvent(`success`, {bubbles:true, detail:{elem:document.querySelector(`.test_2`)}}))}, 400);" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;" data-holding="purple">
+              <div class="codeBlock">
+                <div class="codeSection">
+                  <div class="codeString">&ltp <span class="name">style</span>="background-color: <span data-changeTarget="bcolor">white</span>; color: <span data-changeTarget="color">black</span>; font-style: <span data-changeTarget="style">italic</span>; font-weight: <span data-changeTarget="weight">normal</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+                </div>
+              </div>
+              <div class="screen" style="overflow: hidden;"></div>
+            </div>
+            <div class="success">
+              <div class="successIn" style="z-index: 10;">
+                <div class="fr"></div>
+                <div class="sc"></div>
+              </div>
+              <div class="leftSide" style="z-index: 2; width: 50%; height: 80px; transform-origin: 100% 50%; overflow: hidden;position: absolute;">
+                <div class="innerLeft" style="width: 200%; border-radius: 50%; height: 80px; background-color: #3b58ad"></div>
+              </div>
+              <div class="rightSide" style="width: 50%; height: 80px; overflow: hidden; background-color: #6f95ff;position: absolute;">
+                <div class="innerRight"></div>
+              </div>
+            </div>
+            </div>
+        </div>
+        <div class="test_3 slideTest">
+          <h2 style="margin-top: 6vh;">Задание 3</h2>
+          <p>Сделайте тест абзаца жирным и курсивным(шрифт Arial), лишние стили давать не нужно(остальные должны имет значения по-умолчанию).</p>
+          <div class="inner" style="margin-top: 5vh;">
+            <div class="text" style="order: 2;">
+              <section class="game wrap" data-possibility="onlyOne" data-holder="test3" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+                <div data-dnd-value="purple" data-dnd style="order: 1;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">purple</span>;</p></div>
+                <div data-dnd-value="monospace" data-dnd style="order: 2;margin-bottom: 1vh;"><p>font-family: <span data-changeTarget="family">monospace</span>;</p></div>
+                <div data-dnd-value="bold" data-dnd style="order: 3;margin-top: 1vh;"><p>font-weight: <span data-changeTarget="weight">bold</span>;</p></div>
+                <div data-dnd-value="italic" data-dnd style="order: 4;margin-top: 1vh;"><p>font-style: <span data-changeTarget="style">italic</span>;</p></div>
+              </section>
+            </div>
+            <div class="code" style="margin-right: 3vw; margin-left: 3vh; order: 1; margin-top: auto; margin-bottom: auto;" id="test3" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target);setTimeout(()=>{if (document.querySelector(`.test_3 .screen p`).style.cssText === `color: black; font-family: Arial; font-style: italic; font-weight: bold;`) dragElem.dispatchEvent(new CustomEvent(`success`, {bubbles:true, detail:{elem:document.querySelector(`.test_3`)}}))}, 400);" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;" data-holding="purple">
+              <div class="codeBlock">
+                <div class="codeSection">
+                  <div class="codeString">&ltp <span class="name">style</span>="color: <span data-changeTarget="color">black</span>; font-family: <span data-changeTarget="family">Arial</span>; font-style: <span data-changeTarget="style">normal</span>; font-weight: <span data-changeTarget="weight">normal</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+                </div>
+              </div>
+              <div class="screen" style="overflow: hidden;"></div>
+            </div>
+            <div class="success">
+              <div class="successIn" style="z-index: 10;">
+                <div class="fr"></div>
+                <div class="sc"></div>
+              </div>
+              <div class="leftSide" style="z-index: 2; width: 50%; height: 80px; transform-origin: 100% 50%; overflow: hidden;position: absolute;">
+                <div class="innerLeft" style="width: 200%; border-radius: 50%; height: 80px; background-color: #3b58ad"></div>
+              </div>
+              <div class="rightSide" style="width: 50%; height: 80px; overflow: hidden; background-color: #6f95ff;position: absolute;">
+                <div class="innerRight"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="test_4 slideTest">
+          <h2 style="margin-top: 6vh;">Задание 4</h2>
+          <p>Дайте всем свойствам абзаца значения по-умолчанию.</p>
+          <div class="inner" style="margin-top: 5vh;">
+            <div class="text" style="order: 2;">
+              <section class="game wrap" data-possibility="onlyOne" data-holder="test4" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+                <div data-dnd-value="black" data-dnd style="order: 1;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">black</span>;</p></div>
+                <div data-dnd-value="white" data-dnd style="order: 2;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">white</span>;</p></div>
+                <div data-dnd-value="normal" data-dnd style="order: 3;margin-top: 1vh;"><p>font-weight: <span data-changeTarget="weight">normal</span>;</p></div>
+                <div data-dnd-value="italic" data-dnd style="order: 4;margin-top: 1vh;"><p>font-style: <span data-changeTarget="style">italic</span>;</p></div>
+              </section>
+            </div>
+            <div class="code" style="margin-right: 3vw; margin-left: 3vh; order: 1; margin-top: auto; margin-bottom: auto;" id="test4" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target);setTimeout(()=>{if (document.querySelector(`.test_4 .screen p`).style.cssText === `color: black; font-style: normal; font-weight: normal;`) dragElem.dispatchEvent(new CustomEvent(`success`, {bubbles:true, detail:{elem:document.querySelector(`.test_4`)}}))}, 400);" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;" data-holding="purple">
+              <div class="codeBlock">
+                <div class="codeSection">
+                  <div class="codeString">&ltp <span class="name">style</span>="color: <span data-changeTarget="color">purple</span>; font-style: <span data-changeTarget="style">normal</span>; font-weight: <span data-changeTarget="weight">bold</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+                </div>
+              </div>
+              <div class="screen" style="overflow: hidden;"></div>
+            </div>
+            <div class="success">
+              <div class="successIn" style="z-index: 10;">
+                <div class="fr"></div>
+                <div class="sc"></div>
+              </div>
+              <div class="leftSide" style="z-index: 2; width: 50%; height: 80px; transform-origin: 100% 50%; overflow: hidden;position: absolute;">
+                <div class="innerLeft" style="width: 200%; border-radius: 50%; height: 80px; background-color: #3b58ad"></div>
+              </div>
+              <div class="rightSide" style="width: 50%; height: 80px; overflow: hidden; background-color: #6f95ff;position: absolute;">
+                <div class="innerRight"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="test_5 slideTest">
+          <h2 style="margin:0;">Бонус</h2>
+          <p style="z-index: 1000;">У всех свойст есть значения по-умолчанию, но какое значение по-умолчанию у background-color? По-умолчанию цвет фона прозрачны!
+          Действительно есть специальный цвет обозначающий прозрачность - transparent. И причем применять мы можем его не только к background-color,
+          а и к любым свойствам задающих цвет. Задание: Сделайте фон и цвет абзаца прозрачными</p>
+          <div class="inner" style="margin-top: 3vh;">
+            <div class="text" style="order: 2;">
+              <section class="game wrap" data-possibility="onlyOne" data-holder="test5" data-dnd-hoverBehavior="center" data-dnd-dosuccess="dragElem.info.change = dragElem.querySelector(`[data-changeTarget]`); dragElem.info.change.style.color = `#3b58ad`;" data-dnd-successstyle="transform: none;" data-dnd-styleBegin="transform: scale(0.8);">
+                <div data-dnd-value="white" data-dnd style="order: 1;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">white</span>;</p></div>
+                <div data-dnd-value="transparent" data-dnd style="order: 2;margin-bottom: 1vh;"><p>color: <span data-changeTarget="color">transparent</span>;</p></div>
+                <div data-dnd-value="red" data-dnd style="order: 3;margin-top: 1vh;"><p>background-color: <span data-changeTarget="bcolor">red</span>;</p></div>
+                <div data-dnd-value="transparent" data-dnd style="order: 4;margin-top: 1vh;"><p>background-color: <span data-changeTarget="bcolor">transparent</span>;</p></div>
+              </section>
+            </div>
+            <div class="code" style="margin-right: 3vw; margin-left: 3vh; order: 1; margin-top: auto; margin-bottom: auto;" id="test5" data-dnd-successStyle="boxShadow: 0 0 14px 7px green;" data-dnd-dosuccess="changeInners(dragElem, target);setTimeout(()=>{if (document.querySelector(`.test_5 .screen p`).style.cssText === `color: transparent; background-color: transparent;`) dragElem.dispatchEvent(new CustomEvent(`success`, {bubbles:true, detail:{elem:document.querySelector(`.test_5`)}}))}, 400);" data-dnd-styleBegin="box-shadow: 0 0 10px 5px #32468c;" data-dnd-doAnywayBefore="target.info.time = 0;" data-dnd-doAnywayAfter="resetPos(dragElem, target)" data-dnd-Donomove="dragElem.style.cssText = dragElem._info.beginStyles; target.style.boxShadow = `none`;" data-dnd-stylenomove="transform: none;" data-dnd-Stylenomove="box-shadow: none;" data-dnd-hoverStyle="box-shadow: 0 0 14px 7px #20264d;" data-holding="purple">
+              <div class="codeBlock">
+                <div class="codeSection">
+                  <div class="codeString">&ltp <span class="name">style</span>="color: <span data-changeTarget="color">black</span>; background-color: <span data-changeTarget="bcolor">purple</span>;" &gt <span class="inside">Это абзац</span> &lt/p&gt</div>
+                </div>
+              </div>
+              <div class="screen" style="overflow: hidden;"></div>
+            </div>
+            <div class="success" style="top: 0;">
+              <div class="successIn" style="z-index: 10;">
+                <div class="fr"></div>
+                <div class="sc"></div>
+              </div>
+              <div class="leftSide" style="z-index: 2; width: 50%; height: 80px; transform-origin: 100% 50%; overflow: hidden;position: absolute;">
+                <div class="innerLeft" style="width: 200%; border-radius: 50%; height: 80px; background-color: #3b58ad"></div>
+              </div>
+              <div class="rightSide" style="width: 50%; height: 80px; overflow: hidden; background-color: #6f95ff;position: absolute;">
+                <div class="innerRight"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p>Спасибо за выбор нашей авиакомпании, надеемся, что полет предоставил вам только море полложительных эмоций, а если серьезно то обязательно пожалуйтесь мне если вам что-то не понраиось,будурад услышать мнение каждого примата.</p>
+    <h2>Пока! <span id="par" style="transition-duration: 0.5s; transition-property: color;"></span></h2>
+  </main>
+  <script src="some.js"></script>
+  <script src="slider2.js"></script>
+  <script src="learn.js"></script>
+  <script src="dndLib.js"></script>
+  <script src="learnTest.js"></script>
 </body>
 </html>
