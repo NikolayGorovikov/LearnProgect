@@ -265,6 +265,7 @@ for (let i of dragN){
             }
             doBegin(target.dataset.dndDoanywayafter, target, holder, `dndDoanywayafter`, target);
             doBegin(holder.dataset.dndDoanywayafter, target, holder, `dndDoanywayafter`, holder);
+            document.documentElement.classList.remove(`unselectable`);
         }, {once: true});
     });
 }
