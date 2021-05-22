@@ -17,6 +17,7 @@ let DND = {
 }
 for (let i of dragN){
     i.ondragstart = ()=>false;
+    i.style.touchAction = `none`;
     let hoverBehavior = {
         mouse(event, elem){
             return [[event.clientX, event.clientY]];
@@ -74,9 +75,11 @@ for (let i of dragN){
         }
     }
 
-    i.addEventListener(`mousedown`, function (event){
+    i.addEventListener(`pointerdown`, function (event){
         let target = event.target.closest(`[data-dnd]`);
-        if (!target || target.allMovePrevented || target.onCanceling) return;
+        if (!target || target.allMovePrevented || target.onCanceling || !event.isPrimary) return;
+        target.setPointerCapture(event.pointerId);
+        document.documentElement.classList.add(`unselectable`);
         target._info = {
             get clone(){
                 return target._system.clone;
@@ -104,6 +107,7 @@ for (let i of dragN){
         holder._info.calcBeginStyles = getComputedStyle(holder);
         holder._info.beginStyleObj = Object.assign({}, holder.style);
         let move = function (elem, event){
+            if (!event.isPrimary) return;
             elem.style.left = event.clientX - xDifference - elem.offsetParent.getBoundingClientRect().x+ `px`;
             elem.style.top = event.clientY - yDifference-elem.offsetParent.getBoundingClientRect().y+`px`;
             target._info.moveStyles = target.style.cssText;
@@ -161,8 +165,8 @@ for (let i of dragN){
                 "-1": `(change) `+target._info.moveStyles
             }
         }
-        document.addEventListener(`mousemove`,setPosition , {once: true});
-        document.addEventListener(`mousemove`, move);
+        target.addEventListener(`pointermove`,setPosition , {once: true});
+        target.addEventListener(`pointermove`, move);
         let tracker,colorsHolder,colorsTarget;
         tracker = {
             "-1": (a)=>!a,
@@ -170,6 +174,7 @@ for (let i of dragN){
         }
         let i = 1;
         function insideCheck(event){
+            if (!event.isPrimary) return;
             try{
                 let cords = hoverBehavior[String(target.dataset.dndHoverbehavior)](event, target);
                 target.style.display = `none`;
@@ -209,20 +214,21 @@ for (let i of dragN){
                 beginStyles(colorsHolder[i], holder, null);
                 doBegin(target.dataset.dndDohover, target, holder, null, null);
                 doBegin(holder.dataset.dndDohover, target, holder, null, null);
-                document.dispatchEvent(new MouseEvent(`mouseup`));
+                document.dispatchEvent(new MouseEvent(`pointerup`));
                 console.log(e);
             }
         }
         let abilityToChange = false;
-        document.addEventListener(`mousemove`, insideCheck);
-        document.addEventListener(`mouseup`, function (event){
+        target.addEventListener(`pointermove`, insideCheck);
+        target.addEventListener(`pointerup`, function (event){
+            if (!event.isPrimary) return;
             target.allMovePrevented = true;
             target.onCanceling = true;
             doBegin(target.dataset.Doanywaybefore, target, holder, `Doanywaybefore`, target);
             doBegin(holder.dataset.Doanywaybefore, target, holder, `Doanywaybefore`, holder);
-            document.removeEventListener(`mousemove`, move);
-            document.removeEventListener(`mousemove`, insideCheck);
-            document.removeEventListener(`mousemove`, setPosition, {once: true});
+            target.removeEventListener(`pointermove`, move);
+            target.removeEventListener(`pointermove`, insideCheck);
+            target.removeEventListener(`pointermove`, setPosition, {once: true});
             if (!isEverMoved) {
                 if (target.dataset.dndStylenomove!==undefined){
                     beginStyles(target.dataset.dndStylenomove, target, `dndStylenomove`);
