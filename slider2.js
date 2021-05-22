@@ -8,7 +8,7 @@ let buttons = document.querySelector(`.buttons`);
 for (var i = 1; i < slides.length+1; i++){
     buttons.insertAdjacentHTML(`beforeend`, `<div class="innerButton" data-number="${i}"></div>`);
 }
-document.body.style.overflow = `hidden`;
+document.documentElement.style.overflow = `hidden`;
 let a;
 let advices = function (detail){
     a = setInterval(()=>{detail.focus.classList.add(`onHover`);setTimeout(()=>detail.focus.classList.remove(`onHover`), 1000)}, 4000);
