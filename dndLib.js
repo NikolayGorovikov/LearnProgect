@@ -165,8 +165,8 @@ for (let i of dragN){
                 "-1": `(change) `+target._info.moveStyles
             }
         }
-        target.addEventListener(`pointermove`,setPosition , {once: true});
-        target.addEventListener(`pointermove`, move);
+        document.addEventListener(`pointermove`,setPosition , {once: true});
+        document.addEventListener(`pointermove`, move);
         let tracker,colorsHolder,colorsTarget;
         tracker = {
             "-1": (a)=>!a,
@@ -219,16 +219,16 @@ for (let i of dragN){
             }
         }
         let abilityToChange = false;
-        target.addEventListener(`pointermove`, insideCheck);
-        target.addEventListener(`pointerup`, function (event){
+        document.addEventListener(`pointermove`, insideCheck);
+        document.addEventListener(`pointerup`, function (event){
             if (!event.isPrimary) return;
             target.allMovePrevented = true;
             target.onCanceling = true;
             doBegin(target.dataset.Doanywaybefore, target, holder, `Doanywaybefore`, target);
             doBegin(holder.dataset.Doanywaybefore, target, holder, `Doanywaybefore`, holder);
-            target.removeEventListener(`pointermove`, move);
-            target.removeEventListener(`pointermove`, insideCheck);
-            target.removeEventListener(`pointermove`, setPosition, {once: true});
+            document.removeEventListener(`pointermove`, move);
+            document.removeEventListener(`pointermove`, insideCheck);
+            document.removeEventListener(`pointermove`, setPosition, {once: true});
             if (!isEverMoved) {
                 if (target.dataset.dndStylenomove!==undefined){
                     beginStyles(target.dataset.dndStylenomove, target, `dndStylenomove`);
